@@ -1,0 +1,19 @@
+#!/bin/sh -e
+
+DIR=/sftp-chroot
+
+is_mnt()
+{
+  awk '$2~/^\/sftp-chroot$/' /proc/mounts | grep -q .
+}
+
+if ! is_mnt
+then
+  if [ ! -d "$DIR" ]
+  then
+    mkdir -m 0755 -p $DIR
+  fi
+  mount -t tmpfs tmpfs $DIR
+  chown root:root $DIR
+  chmod 0755 $DIR
+fi
