@@ -1,0 +1,62 @@
+#!/usr/bin/perl -CSDAL
+
+use warnings;
+use strict;
+
+my $fn_dirs = "/etc/iserv/sftp-chroot";
+my $dest = "/sftp-chroot";
+
+open my $fh, "<", $fn_dirs;
+
+my %want;
+my %given;
+
+while (<$fh>)
+{
+  chomp;
+
+  # empty line
+  next if /^$/;
+  # comment
+  next if /^#/;
+
+  # allow only absolute paths
+  die "invalid directory name: $_\n!" if not /^\//;
+
+  print "adding mount $_ to chroot.\n";
+  $want{$_} = 1;
+}
+
+close $fh;
+
+open $fh, "<", "/proc/mounts";
+
+while (<$fh>)
+{
+  chomp;
+  next if not /^\/dev\/.*\s\/sftp-chroot(.*)\sext[0-9]/;
+  my $mountpoint = $1;
+
+  print "mount $mountpoint given.\n";
+
+  if (defined $want{$mountpoint})
+  {
+    print "mount $mountpoint is wanted, keep it.\n";
+    $given{$mountpoint} = 1;
+  } else
+  {
+    print "mount $mountpoint is not wanted, unmount it.\n";
+    system "umount", "-l", "-R", $dest . $mountpoint;
+    rmdir $dest . $mountpoint;
+  }
+}
+
+for (keys %want)
+{
+  next if defined $given{$_};
+  die "invalid directory $_!" if not -e $_;
+
+  print "bind not existing $_.\n";
+  system "mkdir", "-p", $dest . $_;
+  system "mount", "--bind", $_, $dest . $_;
+}

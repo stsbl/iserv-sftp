@@ -1,0 +1,3 @@
+#!/usr/bin/perl -p -CSDAL
+
+s/^AllowGroups (.*)$//;

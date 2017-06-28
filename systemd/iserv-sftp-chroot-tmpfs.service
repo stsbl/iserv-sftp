@@ -1,0 +1,11 @@
+[Unit]
+Description=Create tmpfs for SFTP chroot
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+SyslogIdentifier=iserv-sftp-chroot-tmpfs.service
+ExecStart=/usr/lib/iserv/sftp_chroot_tmpfs
+
+[Install]
+WantedBy=multi-user.target

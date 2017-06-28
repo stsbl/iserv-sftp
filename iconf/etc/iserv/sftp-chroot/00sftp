@@ -1,0 +1,14 @@
+# List of in sftp chroot available directories
+#
+# This file is generated automatically by iservchk.
+# It is not recommended to make any changes to this file.
+# If really necessary you can save changes permanently using:
+#   iconf save /etc/iserv/sftp-chroot
+
+/home
+/group
+/srv/shares
+
+# Please add additional directories after this comment and remember 
+# to save this file with iconf save!
+

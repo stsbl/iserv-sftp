@@ -1,0 +1,13 @@
+# chksftpchroot
+[Unit]
+Description=Run chksftpchroot
+After=iserv-sftp-chroot-tmpfs.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+SyslogIdentifier=iserv-chksftpchroot.service
+ExecStart=/usr/sbin/chksftpchroot
+
+[Install]
+WantedBy=multi-user.target

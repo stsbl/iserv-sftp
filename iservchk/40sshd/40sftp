@@ -1,0 +1,11 @@
+MkDir 0755 root:root /sftp-chroot
+
+Test "mount tmpfs on /sftp-chroot"
+  " awk '$2~/^\/sftp-chroot$/' /proc/mounts | grep -q ."
+  "mount -t tmpfs tmpfs /sftp-chroot"
+Start iserv-sftp-chroot-tmpfs
+
+Check /etc/iserv/sftp-chroot
+Start iserv-chksftpchroot
+Shell "check sftp chroot"
+  "chksftpchroot"
