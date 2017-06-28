@@ -1,3 +1,11 @@
+stsbl-iserv-sftp (17.06.28-2) experimental; urgency=medium
+
+  [ Felix Jacobi ]
+  * tmpfs mount: set mode, uid and gid explicitly.
+  * Removed race condition with iserv-plan.
+
+ -- Stadtteilschule Blankenese <repository@stsbl.de>  Wed, 28 Jun 2017 18:17:19 +0200
+
 stsbl-iserv-sftp (17.06.28-1) experimental; urgency=medium
 
   [ Felix Jacobi ]
