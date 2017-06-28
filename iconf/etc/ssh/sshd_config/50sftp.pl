@@ -47,6 +47,7 @@ for (@GrpSSH)
     next if defined $listed_users{$user};
     my @pwnam = getpwnam $user;
     next if not $pwnam[8] =~ /^(\/usr\/sbin\/nologin|\/bin\/false)/;
+    next if defined $listed_users{$user};
     push @limited_users, $user;
     $listed_users{$user} = 1;
   }
