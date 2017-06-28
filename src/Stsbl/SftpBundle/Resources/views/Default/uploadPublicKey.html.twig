@@ -1,0 +1,25 @@
+{# src/Stsbl/SftpBundle/Resources/views/Default/uploadPublicKey.html.twig #}
+{%  extends 'IServCoreBundle::page.html.twig' %}
+
+{%  block page_title %}
+    {{  _('Keys') }}
+{%  endblock %}
+
+{% block content %}
+    <div class="alert alert-info">
+        {{ __('For creating a SSH key under Windows, you can follow the guide "%s". For linux, you can follow this guide: "%s". After that, paste the public key in the formular below. Then you can you use the composite SSH private key with an SFTP client to login without a password.',
+                '<a target="_blank" href="http://www.informatik.uni-bremen.de/t/SSH/Putty_PubKey_Config">Putty: Public Key ' ~
+                'Authentication konfigurieren, Punkt 1: Erzeugen der Keys</a>',
+                '<a target="_blank" href="https://www.thomas-krenn.com/de/wiki/OpenSSH_Public_Key_Authentifizierung_unter_Ubuntu#Schl.C3.BCsselpaar_generieren">' ~
+                'OpenSSH Public Key Authentifizierung unter Ubuntu, Punkt 1.1 Schlüsselpaar generieren</a>')|raw }}
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                {{  _('Define keys for password less login with SFTP') }}
+            </h3>
+        </div>
+        <div class="panel-body">
+            {{ form(form) }}
+        </div>
+{% endblock %}

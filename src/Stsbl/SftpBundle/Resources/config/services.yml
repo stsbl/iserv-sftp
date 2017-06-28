@@ -1,0 +1,5 @@
+services:
+    stsbl.sftp.menu:
+        class: Stsbl\SftpBundle\EventListener\MenuSubscriber # Out MenuSubscriber Class
+        tags:
+            - { name: kernel.event_subscriber } # Tells IServ about our subsriber
