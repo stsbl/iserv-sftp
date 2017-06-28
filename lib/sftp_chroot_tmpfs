@@ -13,7 +13,5 @@ then
   then
     mkdir -m 0755 -p $DIR
   fi
-  mount -t tmpfs tmpfs $DIR
-  chown root:root $DIR
-  chmod 0755 $DIR
+  mount -o mode=755,uid=0,gid=0 -t tmpfs tmpfs $DIR
 fi
