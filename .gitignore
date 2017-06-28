@@ -1,0 +1,5 @@
+debian/stsbl-iserv-sftp/*
+debian/stsbl-iserv-sftp.substvars
+debian/stsbl-iserv-sftp.debhelper.log
+debian/files
+debian/debhelper-build-stamp
