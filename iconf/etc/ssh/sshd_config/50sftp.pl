@@ -35,7 +35,7 @@ print "!iserv-remote-support\n";
 print "ChrootDirectory /sftp-chroot\n";
 print "X11Forwarding no\n";
 print "AllowTcpForwarding no\n";
-print "ForceCommand internal-sftp\n\n";
+print "ForceCommand internal-sftp -P symlink -l INFO -d %d -u 0002\n\n";
 
 my %listed_users;
 my @limited_users;
@@ -63,5 +63,5 @@ if (@limited_users > 0)
   my $users = join ",", @limited_users;
   print "Match User ".$users."\n";
   print "ChrootDirectory /sftp-chroot\n";
-  print "ForceCommand internal-sftp\n\n";
+  print "ForceCommand internal-sftp -P symlink -l INFO -d %d -u 0002\n\n";
 }
