@@ -1,3 +1,10 @@
+stsbl-iserv-sftp (17.06.30-0) experimental; urgency=medium
+
+  [ Felix Jacobi ]
+  * Added home directory argument to base sftp subsystem.
+
+ -- Stadtteilschule Blankenese <repository@stsbl.de>  Fri, 30 Jun 2017 00:04:24 +0200
+
 stsbl-iserv-sftp (17.06.29-1) experimental; urgency=medium
 
   [ Felix Jacobi ]
