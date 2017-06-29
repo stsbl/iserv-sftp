@@ -1,0 +1,36 @@
+#!/usr/bin/perl -T -CSDAL
+
+use warnings;
+use strict;
+use Stsbl::IServ::IO;
+use Stsbl::IServ::Log;
+
+undef %ENV;
+
+my $m_act = qr/^[a-z][a-z0-9._-]*$/;
+my $m_ip = qr/[0-9a-f.:]{1,64}/;
+my $m_action = qr/login|logout/;
+
+my ($action, $ip, $act) = @ARGV;
+
+error "invalid act" if not $act =~ /^($m_act)/;
+error "invalid ip" if not $ip =~ /^($m_ip)$/;
+error "invalid action" if not $action =~ /^($m_action)/;
+
+my $fullname = IServ::DB::SelectVal "SELECT firstname || ' ' || lastname ".
+  "FROM users_name WHERE act = ?", $act;
+exit if not defined $fullname;
+
+# trim
+$fullname =~ s/^\s+|\s+$//g;
+
+$Stsbl::IServ::Log::logip = $ip;
+$Stsbl::IServ::Log::logname = $fullname;
+
+if ($action eq "login")
+{
+  Stsbl::IServ::Log::log_store "SFTP-Login erfolgreich";
+} elsif ($action eq "logout")
+{
+  Stsbl::IServ::Log::log_store "SFTP-Logout erfolgreich";
+}

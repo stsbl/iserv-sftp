@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# use this to debug pam environment variables
+#/usr/bin/env > /tmp/sftp-login
+
+if [ "$PAM_TYPE" = "open_session" ]
+then
+  TYPE=login
+elif [ "$PAM_TYPE" = "close_session" ]
+then
+  TYPE=logout
+else
+  exit
+fi
+
+exec /usr/lib/iserv/sftp_log "$TYPE" "$PAM_RHOST" "$PAM_USER"

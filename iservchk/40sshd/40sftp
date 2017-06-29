@@ -9,3 +9,9 @@ Check /etc/iserv/sftp-chroot
 Start iserv-chksftpchroot
 Shell "check sftp chroot"
   "chksftpchroot"
+
+Check /etc/pam.d/sshd-sftp
+Test "insert /etc/pam.d/sshd-sftp in /etc/pam.d/sshd"
+  "grep -q '@include sshd-sftp' /etc/pam.d/sshd"
+  "sed -i '1i@include sshd-sftp' /etc/pam.d/sshd"
+
