@@ -1,3 +1,20 @@
+stsbl-iserv-sftp (17.06.29-0) experimental; urgency=medium
+
+  [ Felix Jacobi ]
+  * Added umask to sftp options.
+  * Apply command line options also to ForceCommand directives as global 
+    options seems to does not have any effect.
+  * Removed global command restrictions and umask to allow root still 
+    to use symlinks and keep his restrictive umask.
+  * Use special sftp subsystem command with umask junction for users
+    with shell.
+  * Added logging hook via PAM.
+  * Use sh instead of bash for sftp_subsytem.
+
+  iserv: Die Anmeldung via SFTP wird nun in den IServ-Logs vermerkt.
+
+ -- Stadtteilschule Blankenese <repository@stsbl.de>  Thu, 29 Jun 2017 13:47:44 +0200
+
 stsbl-iserv-sftp (17.06.28-2) experimental; urgency=medium
 
   [ Felix Jacobi ]
