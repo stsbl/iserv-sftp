@@ -61,7 +61,23 @@ if (@limited_users > 0)
       "# run \"iservchk sshd\". The users also must have a membership in one\n".
       "# of the groups listed in the GrpSSH setting in iservfg.\n";
   my $users = join ",", @limited_users;
-  print "Match User ".$users."\n";
+  print "Match User $users\n";
   print "ChrootDirectory /sftp-chroot\n";
   print "ForceCommand internal-sftp -P symlink -l INFO -d %d -u 0002\n\n";
 }
+
+#my @groups;
+#for (@GrpSSH)
+#{
+#  next if $_ eq "root";
+#  push @groups, $_;
+#}
+
+#if (@groups > 0)
+#{
+#  print "\n";
+#  print "# Set umask for GrpSSH users\n";
+#  my $groups = join ",", @groups;
+#  print "Match Group $groups\n";
+#  print "SftpUmask 0002\n";
+#}
