@@ -22,4 +22,4 @@ Description: SFTP für IServ (EXPERIMENTELL)
  Das Protokoll eignet sich insbesondere besser für die Offline-Synchronisation, zum 
  Beispiel mit dem heimischen PC. Bei FTP und WebDAV gibt es dabei häufig Probleme 
  mit der Übertragung der Zeitstempel.
-Tag: suite::iserv:portal, role::plugin, status::highlighted, status::experimental
+Tag: suite::iserv:portal, role::plugin, status::highlighted, status::experimental, implemented-in::shell, implemented-in::php, implemented-in::perl
