@@ -1,3 +1,12 @@
+stsbl-iserv-sftp (17.06.29-1) experimental; urgency=medium
+
+  [ Felix Jacobi ]
+  * Added dependency on stsbl-iserv-perl-lib.
+  * Updated package tags.
+  * Expire sftp login log.
+
+ -- Stadtteilschule Blankenese <repository@stsbl.de>  Thu, 29 Jun 2017 14:09:35 +0200
+
 stsbl-iserv-sftp (17.06.29-0) experimental; urgency=medium
 
   [ Felix Jacobi ]
