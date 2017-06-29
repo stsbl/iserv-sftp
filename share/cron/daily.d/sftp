@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# expire sftp login log
+psql iserv postgres -qc "DELETE FROM log
+  WHERE Date < now() - '6 month'::interval AND Text IN (
+    'SFTP-Login erfolgreich',
+    'SFTP-Logout erfolgreich'
+  )"
+
