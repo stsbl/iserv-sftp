@@ -1,4 +1,4 @@
-# SFTP Server: PAM configuration for the Secure Shell service
+# Login Logging: PAM configuration for the Secure Shell service
 # 
 # This file is generated automatically by iservchk.
 # It is not recommended to make any changes to this file.
