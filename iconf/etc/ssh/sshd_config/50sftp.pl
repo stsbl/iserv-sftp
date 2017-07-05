@@ -35,7 +35,7 @@ print "!iserv-remote-support\n";
 print "ChrootDirectory /sftp-chroot\n";
 print "X11Forwarding no\n";
 print "AllowTcpForwarding no\n";
-print "ForceCommand internal-sftp -P symlink -l INFO -d %d -u 0002\n\n";
+print "#ForceCommand internal-sftp -P symlink -l INFO -d %d -u 0002\n\n";
 
 my %listed_users;
 my @limited_users;
@@ -46,7 +46,7 @@ for (@GrpSSH)
   {
     next if defined $listed_users{$user};
     my @pwnam = getpwnam $user;
-    next if not $pwnam[8] =~ /^(\/usr\/sbin\/nologin|\/bin\/false)/;
+    next if not $pwnam[8] =~ /^(\/usr\/sbin\/nologin|\/bin\/false|\/usr\/bin\/rssh)/;
     next if defined $listed_users{$user};
     push @limited_users, $user;
     $listed_users{$user} = 1;
@@ -63,7 +63,7 @@ if (@limited_users > 0)
   my $users = join ",", @limited_users;
   print "Match User $users\n";
   print "ChrootDirectory /sftp-chroot\n";
-  print "ForceCommand internal-sftp -P symlink -l INFO -d %d -u 0002\n\n";
+  print "#ForceCommand internal-sftp -P symlink -l INFO -d %d -u 0002\n\n";
 }
 
 #my @groups;

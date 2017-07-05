@@ -6,6 +6,21 @@ use strict;
 my $fn_dirs = "/etc/iserv/sftp-chroot";
 my $dest = "/sftp-chroot";
 
+sub mount_failure($)
+{
+  my $mountpoint = shift;
+
+  die "mount of $mountpoint in $dest failed!\n";
+}
+
+# mount tmpfs if /sftp-chroot is not a mountpoint
+if (system ("mountpoint", "-q", $dest))
+{
+  print "mount tmpfs on $dest.\n";
+  system ("umount", "-l", "-R", $dest) == 0 or die "umount of $dest failed!\n";
+  system ("mount", "-o", "mode=755,uid=0,gid=0", "-t", "tmpfs", "tmpfs", "/sftp-chroot") == 0 or mount_failure "tmpfs";
+}
+
 open my $fh, "<", $fn_dirs;
 
 my %want;
@@ -34,8 +49,9 @@ open $fh, "<", "/proc/mounts";
 while (<$fh>)
 {
   chomp;
-  next if not /^\/dev\/.*\s\/sftp-chroot(.*)\sext[0-9]/;
+  next if not /^.*\s\/sftp-chroot(.*)\s(ext[0-9]|tmpfs|devtmpfs|sysfs|proc|devpts)/;
   my $mountpoint = $1;
+  next if $mountpoint eq "" or not defined $mountpoint;
 
   print "mount $mountpoint given.\n";
 
@@ -45,8 +61,10 @@ while (<$fh>)
     $given{$mountpoint} = 1;
   } else
   {
+    # ignore sub mounts in /run and /var/run
+    next if $mountpoint =~ /^(\/run|\/var\/run)/;
     print "mount $mountpoint is not wanted, unmount it.\n";
-    system "umount", "-l", "-R", $dest . $mountpoint;
+    system ("umount", "-l", "-R", $dest . $mountpoint) == 0 or die "umount of " . $dest . $mountpoint . " failed!\n";
     rmdir $dest . $mountpoint;
   }
 }
@@ -54,9 +72,28 @@ while (<$fh>)
 for (keys %want)
 {
   next if defined $given{$_};
+  
   die "invalid directory $_!" if not -e $_;
 
   print "bind not existing $_.\n";
-  system "mkdir", "-p", $dest . $_;
-  system "mount", "--bind", $_, $dest . $_;
+  
+  system ("mkdir", "-p", $dest . $_) == 0 or die "mkdir " . $_ . $dest . " failed!\n";
+
+  # special handling for sys/proc/dev/pts
+  if ($_ eq "/dev")
+  {
+    system ("mount", "-t", "devtmpfs", "udev", $dest . $_) == 0 or mount_failure $_;
+  } elsif ($_ eq "/sys")
+  {
+    system ("mount", "-t", "sysfs", "sysfs", $dest . $_, "-o", "rw,nosuid,nodev,noexec,relatime") == 0 or mount_failure $_;
+  } elsif ($_ eq "/proc")
+  {
+    system ("mount", "-t", "proc", "proc", $dest . $_, "-o", "rw,nosuid,nodev,noexec,relatime") == 0 or mount_failure $_;
+  } elsif ($_ eq "/dev/pts")
+  {
+    system ("mount", "-t", "devpts", "devpts", $dest . $_) == 0 or mount_failure $_; 
+  } else 
+  {
+    system ("mount", "--bind", $_, $dest . $_) == 0 or mount_failure $_;
+  }
 }
