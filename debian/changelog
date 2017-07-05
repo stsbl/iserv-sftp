@@ -1,3 +1,13 @@
+stsbl-iserv-sftp (17.07.05-0) experimental; urgency=medium
+
+  [ Felix Jacobi ]
+  * Added basic support for new rssh package.
+  * Renamed sftp_log to ssh_log.
+  * Fixed file header.
+  * Moved sftp checks to own iservchk service.
+
+ -- Stadtteilschule Blankenese <repository@stsbl.de>  Wed, 05 Jul 2017 08:16:03 +0200
+
 stsbl-iserv-sftp (17.06.30-0) experimental; urgency=medium
 
   [ Felix Jacobi ]
