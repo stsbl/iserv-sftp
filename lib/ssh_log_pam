@@ -13,4 +13,4 @@ else
   exit
 fi
 
-exec /usr/lib/iserv/sftp_log "$TYPE" "$PAM_RHOST" "$PAM_USER"
+exec /usr/lib/iserv/ssh_log "$TYPE" "$PAM_RHOST" "$PAM_USER"

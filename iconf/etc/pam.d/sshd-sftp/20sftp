@@ -5,5 +5,5 @@
 # If really necessary you can save changes permanently using:
 #   iconf save /etc/pam.d/sshd-sftp
 
-session optional pam_exec.so stdout /usr/lib/iserv/sftp_log_pam
+session optional pam_exec.so stdout /usr/lib/iserv/ssh_log_pam
 

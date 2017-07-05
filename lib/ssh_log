@@ -29,8 +29,8 @@ $Stsbl::IServ::Log::logname = $fullname;
 
 if ($action eq "login")
 {
-  Stsbl::IServ::Log::log_store "SFTP-Login erfolgreich";
+  Stsbl::IServ::Log::log_store "Login am SSH-Server erfolgreich";
 } elsif ($action eq "logout")
 {
-  Stsbl::IServ::Log::log_store "SFTP-Logout erfolgreich";
+  Stsbl::IServ::Log::log_store "Logout vom SSH-Server erfolgreich";
 }
