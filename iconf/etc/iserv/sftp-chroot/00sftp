@@ -5,3 +5,7 @@
 # If really necessary you can save changes permanently using:
 #   iconf save /etc/iserv/sftp-chroot
 
+/home
+/group
+/srv/shares
+
