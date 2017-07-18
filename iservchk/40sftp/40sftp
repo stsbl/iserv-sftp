@@ -6,6 +6,7 @@ Test "mount tmpfs on /sftp-chroot"
 Start iserv-sftp-chroot-tmpfs
 
 Check /etc/iserv/sftp-chroot
+Check /etc/iserv/sftp-chroot-binaries
 Start iserv-chksftpchroot
 Shell "check sftp chroot"
   "chksftpchroot"
