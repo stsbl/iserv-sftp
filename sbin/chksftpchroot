@@ -2,8 +2,13 @@
 
 use warnings;
 use strict;
+use Cwd qw(abs_path cwd);
+use File::Basename;
+use File::Compare;
+use IPC::Run;
 
 my $fn_dirs = "/etc/iserv/sftp-chroot";
+my $fn_binaries = "/etc/iserv/sftp-chroot-binaries";
 my $dest = "/sftp-chroot";
 
 sub mount_failure($)
@@ -95,5 +100,141 @@ for (keys %want)
   } else 
   {
     system ("mount", "--bind", $_, $dest . $_) == 0 or mount_failure $_;
+  }
+}
+
+open $fh, "<", $fn_binaries;
+
+undef %want;
+undef %given;
+
+while (<$fh>)
+{
+  chomp;
+
+  # empty line
+  next if /^$/;
+  # comment
+  next if /^#/;
+
+  # allow only absolute paths
+  die "invalid binary name: $_\n!" if not /^\//;
+  
+  print "adding binary $_ to chroot.\n";
+  $want{$_} = 1;
+}
+
+sub mkdir_recursive($)
+{
+  my $cur = cwd;
+  chdir "/";
+  my @dir = split /\//, shift;
+  for (@dir) {
+    mkdir -p $_ or die "mkdir failed: $!\n";
+    chdir $_;
+  }
+
+  chdir $cur;
+}
+
+sub is_vdso($)
+{
+  # linux-vdso.so.1 is not a real shared object
+  return shift eq "linux-vdso.so.1";
+}
+
+sub is_wanted($)
+{
+  my $lib = shift;
+  return defined $want{$lib};
+}
+
+sub resolve_symlink($)
+{
+  my $link = shift;
+
+  return if not -s $link;
+  my $abs = abs_path $link;
+  $want{$abs} = 1;
+  print "adding binary $abs to chroot.\n"
+}
+
+sub resolve_ldd($)
+{
+  IPC::Run::run ["/usr/bin/ldd", shift],
+    ">", IPC::Run::new_chunker "\n",
+    sub
+    {
+      # ldd /usr/bin/scp           
+      # linux-vdso.so.1 (0x00007ffd90f62000)
+      # 	libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007fe48ef60000)
+      # 	/lib64/ld-linux-x86-64.so.2 (0x0000560dae3ed000)
+      local $_ = shift;
+      my $lib;
+
+      if (/^\sstatically\slinked$/)
+      {
+	# noop
+      } elsif (/^\s.* => (.*)\s\(.*\)$/)
+      {
+	if (not is_vdso $1 and not is_wanted $1)
+	{
+          $want{$1} = 1;
+	  $lib = $1;
+	  resolve_symlink $lib;
+	  &resolve_ldd($lib);
+	}
+      } elsif (/^\s(.*)\s\(.*\)$/)
+      {
+	if (not is_vdso $1 and not is_wanted $1)
+	{
+	  $want{$1} = 1;
+	  $lib = $1;
+	  resolve_symlink $lib;
+	  &resolve_ldd($lib);
+	}
+      } else {
+	die "invalid line $_!\n";
+      }
+
+      print "adding binary $lib to chroot.\n" if defined $lib;
+    };
+}
+
+# add complete libc6
+IPC::Run::run ["dpkg", "-L", "libc6"],
+  ">", IPC::Run::new_chunker "\n",
+  sub
+  {
+    local $_ = shift;
+    chomp;
+    my $lib = $_;
+
+    if (/^(\/lib\/|\/usr\/lib).*\.so(\.[0-9]|)$/)
+    {
+      $want{$lib} = $lib;
+      print "adding binary $lib to chroot.\n";
+    }
+  };
+
+for (keys %want)
+{
+  resolve_ldd $_;
+}
+
+for (keys %want)
+{
+  my $dir = dirname $_;
+  
+  if (not -d $dest.$dir)
+  {
+    print "mkdir $dest$dir.\n";
+    system "mkdir", "-p", $dest.$dir;
+  }
+
+  if (compare($_, $dest.$_))
+  {
+    print "copy $_ to ${dest}${_}.\n";
+    system ("cp", "-afb", $_, $dest.$_) == 0 or die "copy failed: $!\n"; 
   }
 }
