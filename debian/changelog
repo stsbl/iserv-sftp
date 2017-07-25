@@ -1,3 +1,13 @@
+stsbl-iserv-sftp (17.07.25-0) experimental; urgency=medium
+
+  [ Felix Jacobi ]
+  * Updated .gitignore.
+  * Updated build dependencies.
+  * Changed log messages to prevent display in login history.
+  * Added legacy script to change logs.
+
+ -- Stadtteilschule Blankenese <repository@stsbl.de>  Tue, 25 Jul 2017 18:47:10 +0200
+
 stsbl-iserv-sftp (17.07.18-2) experimental; urgency=medium
 
   [ Felix Jacobi ]
