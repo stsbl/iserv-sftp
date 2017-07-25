@@ -10,16 +10,18 @@ Package: stsbl-iserv-sftp
 Architecture: all
 Depends: iserv-portal, stsbl-iserv3-maintenance, stsbl-iserv-sftp
 Description: SFTP für IServ (EXPERIMENTELL)
- Dieses Paket stellt einen experimentellen SFTP-Server für alle Serverbenutzer bereit.
+ Dieses Paket stellt einen experimentellen SFTP-Server für alle
+ Serverbenutzer bereit.
  .
- Das SSH File Transfer Protocol oder Secure File Transfer Protocol (SFTP) ist eine für 
- die Secure Shell (SSH) entworfene Alternative zum File Transfer Protocol (FTP), die 
- Verschlüsselung ermöglicht.
+ Das SSH File Transfer Protocol oder Secure File Transfer Protocol (SFTP) ist
+ eine für die Secure Shell (SSH) entworfene Alternative zum File Transfer
+ Protocol (FTP), die Verschlüsselung ermöglicht.
  .
- Im Unterschied zum FTP über TLS (FTPS) begnügt sich SFTP mit einer einzigen 
- Verbindung zwischen Client und Server.
+ Im Unterschied zum FTP über TLS (FTPS) begnügt sich SFTP mit einer 
+ einzigen Verbindung zwischen Client und Server.
  .
- Das Protokoll eignet sich insbesondere besser für die Offline-Synchronisation, zum 
- Beispiel mit dem heimischen PC. Bei FTP und WebDAV gibt es dabei häufig Probleme 
- mit der Übertragung der Zeitstempel.
+ Das Protokoll eignet sich insbesondere besser für die 
+ Offline-Synchronisation, zum  Beispiel mit dem heimischen PC. 
+ Bei FTP und WebDAV gibt es dabei häufig Probleme mit der Übertragung 
+ der Zeitstempel.
 Tag: suite::iserv:portal, role::plugin, status::highlighted, status::experimental, implemented-in::shell, implemented-in::php, implemented-in::perl
