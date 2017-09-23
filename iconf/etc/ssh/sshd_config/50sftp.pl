@@ -37,30 +37,27 @@ print "X11Forwarding no\n";
 print "AllowTcpForwarding no\n";
 print "#ForceCommand internal-sftp -P symlink -l INFO -d %d -u 0002\n\n";
 
-my %listed_users;
-my @limited_users;
+my %limited_users;
 for (@GrpSSH)
 {
   my @users = IServ::DB::SelectCol "SELECT ActUser FROM members WHERE ActGrp = ?", $_;
   foreach my $user (@users)
   {
-    next if defined $listed_users{$user};
+    next if defined $limited_users{$user};
     my @pwnam = getpwnam $user;
     next if not $pwnam[8] =~ /^(\/usr\/sbin\/nologin|\/bin\/false|\/usr\/bin\/rssh)/;
-    next if defined $listed_users{$user};
-    push @limited_users, $user;
-    $listed_users{$user} = 1;
+    $limited_users{$user} = 1;
   }
 }
 
-if (@limited_users > 0)
+if (keys %limited_users > 0)
 {
   print "# Limit members of groups from GrpSSH without shell to chroot and sftp\n\n";
   print "# --- WARNING: DO NOT CHANGE THIS MATCH BLOCK BY HAND! --- \n\n";
   print "# To remove users which you just granted shell access from this block\n".
       "# run \"iservchk sshd\". The users also must have a membership in one\n".
       "# of the groups listed in the GrpSSH setting in iservfg.\n";
-  my $users = join ",", @limited_users;
+  my $users = join ",", keys %limited_users;
   print "Match User $users\n";
   print "ChrootDirectory /sftp-chroot\n";
   print "#ForceCommand internal-sftp -P symlink -l INFO -d %d -u 0002\n\n";
