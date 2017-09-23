@@ -6,4 +6,5 @@
 #   iconf save /etc/pam.d/sshd-sftp
 
 session optional pam_exec.so stdout /usr/lib/iserv/ssh_log_pam
+session optional pam_umask.so usergroups umask=0022
 
