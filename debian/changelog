@@ -1,3 +1,12 @@
+stsbl-iserv-sftp (17.09.27-0) experimental; urgency=medium
+
+  * Fixed too long extended description.
+  * Use pam_umask to set umask.
+    This should fix the issue with unflexible umask setting in sshd_config.
+  * sshd_config: Simplified iconf template.
+
+ -- Felix Jacobi <felix.jacobi@iserv.eu>  Wed, 27 Sep 2017 01:19:18 +0200
+
 stsbl-iserv-sftp (17.07.25-0) experimental; urgency=medium
 
   [ Felix Jacobi ]
