@@ -8,7 +8,7 @@ Standards-Version: 3.9.5
 
 Package: stsbl-iserv-sftp
 Architecture: all
-Depends: iserv-portal, stsbl-iserv3-maintenance, stsbl-iserv-sftp
+Depends: ${perl:Depends}, ${misc:Depends}, iserv-portal, stsbl-iserv3-maintenance, stsbl-iserv-sftp
 Description: SFTP für IServ (EXPERIMENTELL)
  Dieses Paket stellt einen experimentellen SFTP-Server für alle
  Serverbenutzer bereit.
