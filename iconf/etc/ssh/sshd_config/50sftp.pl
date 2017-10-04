@@ -57,7 +57,7 @@ if (keys %limited_users > 0)
   print "# To remove users which you just granted shell access from this block\n".
       "# run \"iservchk sshd\". The users also must have a membership in one\n".
       "# of the groups listed in the GrpSSH setting in iservfg.\n";
-  my $users = join ",", keys %limited_users;
+  my $users = join ",", sort keys %limited_users;
   print "Match User $users\n";
   print "ChrootDirectory /sftp-chroot\n";
   print "#ForceCommand internal-sftp -P symlink -l INFO -d %d -u 0002\n\n";
