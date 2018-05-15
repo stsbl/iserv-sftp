@@ -1,4 +1,0 @@
-# DO NOT PUT ANY CUSTOM CONFIGURATION HERE!
-# Any directives beyond the "Match Group" and "Match User" directive are part of the 
-# conditional block and won't have any effect on normal logins.
-
