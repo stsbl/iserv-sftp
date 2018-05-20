@@ -2,27 +2,26 @@
 
 use warnings;
 use strict;
+use IServ::Valid;
 use Stsbl::IServ::IO;
 use Stsbl::IServ::Log;
 
 undef %ENV;
 
-my $m_act = qr/^[a-z][a-z0-9._-]*$/;
-my $m_ip = qr/[0-9a-f.:]{1,64}/;
-my $m_action = qr/login|logout/;
+my $m_ip = qr/^[0-9a-f.:]{1,64}$/;
+my $m_action = qr/^(login|logout)$/;
 
 my ($action, $ip, $act) = @ARGV;
 
-error "invalid act" if not $act =~ /^($m_act)/;
-error "invalid ip" if not $ip =~ /^($m_ip)$/;
-error "invalid action" if not $action =~ /^($m_action)/;
+die "usage: $0 action ip act" if not defined $action
+    or not defined $ip or not defined $act;
 
-my $fullname = IServ::DB::SelectVal "SELECT firstname || ' ' || lastname ".
-  "FROM users_name WHERE act = ?", $act;
-exit if not defined $fullname;
+IServ::Valid::User $act;
+error "invalid ip" if not $ip =~ /$m_ip/;
+error "invalid action" if not $action =~ /$m_action/;
 
-# trim
-$fullname =~ s/^\s+|\s+$//g;
+my @pwnam = getpwnam $act;
+my $fullname = $pwnam[6];
 
 $Stsbl::IServ::Log::logip = $ip;
 $Stsbl::IServ::Log::logname = $fullname;
@@ -30,7 +29,8 @@ $Stsbl::IServ::Log::logname = $fullname;
 if ($action eq "login")
 {
   Stsbl::IServ::Log::log_store "SSH-Login erfolgreich";
-} elsif ($action eq "logout")
+}
+elsif ($action eq "logout")
 {
   Stsbl::IServ::Log::log_store "SSH-Logout erfolgreich";
 }
