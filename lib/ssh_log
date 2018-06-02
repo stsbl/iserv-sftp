@@ -8,6 +8,8 @@ use Stsbl::IServ::Log;
 
 undef %ENV;
 
+use constant UID_MIN => 500;
+
 my $m_ip = qr/^[0-9a-f.:]{1,64}$/;
 my $m_action = qr/^(login|logout)$/;
 
@@ -16,12 +18,17 @@ my ($action, $ip, $act) = @ARGV;
 die "usage: $0 action ip act" if not defined $action
     or not defined $ip or not defined $act;
 
+my @pwnam = getpwnam $act;
+my $fullname = $pwnam[6];
+
+# uid too low (= non IServ account)
+exit if $pwnam[2] < UID_MIN;
+
 IServ::Valid::User $act;
 error "invalid ip" if not $ip =~ /$m_ip/;
 error "invalid action" if not $action =~ /$m_action/;
 
-my @pwnam = getpwnam $act;
-my $fullname = $pwnam[6];
+
 
 $Stsbl::IServ::Log::logip = $ip;
 $Stsbl::IServ::Log::logname = $fullname;
