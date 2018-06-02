@@ -1,3 +1,9 @@
+stsbl-iserv-sftp (18.06.02-1) experimental; urgency=medium
+
+  * ssh_log: Fixed too low uid
+
+ -- Felix Jacobi <felix.jacobi@stsbl.de>  Sat, 02 Jun 2018 23:18:43 +0200
+
 stsbl-iserv-sftp (18.05.20-1) experimental; urgency=medium
 
   * Improved ssh_log script
