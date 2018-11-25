@@ -1,3 +1,10 @@
+stsbl-iserv-sftp (18.11.25-1) experimental; urgency=medium
+
+  * Updated build rules for webpack support
+  * Adapted module structure to web application move
+
+ -- Felix Jacobi <felix.jacobi@stsbl.de>  Sun, 25 Nov 2018 23:04:43 +0100
+
 stsbl-iserv-sftp (18.06.02-1) experimental; urgency=medium
 
   * ssh_log: Fixed too low uid
