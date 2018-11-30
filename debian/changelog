@@ -1,3 +1,9 @@
+stsbl-iserv-sftp (18.11.30-1) experimental; urgency=medium
+
+  * Updated sftp subsystem filter
+
+ -- Felix Jacobi <felix.jacobi@stsbl.de>  Fri, 30 Nov 2018 01:01:30 +0100
+
 stsbl-iserv-sftp (18.11.25-1) experimental; urgency=medium
 
   * Updated build rules for webpack support
