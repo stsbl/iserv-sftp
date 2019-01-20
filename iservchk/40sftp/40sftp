@@ -1,18 +1,19 @@
 MkDir 0755 root:root /sftp-chroot
 
 Test "mount tmpfs on /sftp-chroot"
-  " awk '$2~/^\/sftp-chroot$/' /proc/mounts | grep -q ."
-  "mount -o mode=755,uid=0,gid=0 -t tmpfs tmpfs /sftp-chroot"
+  awk '$2~/^\/sftp-chroot$/' /proc/mounts | grep -q .
+  ---
+  mount -o mode=755,uid=0,gid=0 -t tmpfs tmpfs /sftp-chroot
+
 Start iserv-sftp-chroot-tmpfs
 
 Check /etc/iserv/sftp-chroot
 Check /etc/iserv/sftp-chroot-binaries
+
 Start iserv-chksftpchroot
-Shell "check sftp chroot"
-  "chksftpchroot"
+
+Shell "sftp chroot"
+  chksftpchroot
 
 Check /etc/pam.d/sshd-sftp
-Test "insert /etc/pam.d/sshd-sftp in /etc/pam.d/sshd"
-  "grep -q '@include sshd-sftp' /etc/pam.d/sshd"
-  "sed -i '1i@include sshd-sftp' /etc/pam.d/sshd"
 

@@ -1,5 +1,0 @@
-Test "change sftp logs"
-  "grep ^80legacy/40sftp$ /var/lib/iserv/config/update.log"
-  "psql -c \"Update log SET text = 'SSH-Login erfolgreich' WHERE text = 'Login am SSH-Server erfolgreich'\" iserv postgres && 
-   psql -c \"Update log SET text = 'SSH-Logout erfolgreich' WHERE text = 'Logout vom SSH-Server erfolgreich'\" iserv postgres && 
-   echo 80legacy/40sftp >> /var/lib/iserv/config/update.log"
