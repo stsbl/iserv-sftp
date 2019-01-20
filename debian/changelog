@@ -1,3 +1,9 @@
+stsbl-iserv-sftp (19.01.20-1) experimental; urgency=medium
+
+  * Migrated PAM sshd configuration to iconf
+
+ -- Felix Jacobi <Felix@jacobi-hamburg.net>  Sun, 20 Jan 2019 19:57:12 +0100
+
 stsbl-iserv-sftp (18.11.30-1) experimental; urgency=medium
 
   * Updated sftp subsystem filter
