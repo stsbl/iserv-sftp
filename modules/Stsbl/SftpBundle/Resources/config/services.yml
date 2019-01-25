@@ -1,5 +1,16 @@
 services:
-    stsbl.sftp.menu:
-        class: Stsbl\SftpBundle\EventListener\MenuSubscriber # Out MenuSubscriber Class
-        tags:
-            - { name: kernel.event_subscriber } # Tells IServ about our subsriber
+    _defaults:
+        autoconfigure: true
+        autowire: true
+        public: false
+
+    Stsbl\SftpBundle\:
+        resource: '../../*'
+        exclude: '../../{Entity,Model,Resources,Tests}'
+
+    Stsbl\SftpBundle\Controller\:
+        bind:
+            $userProfileMenu: '@iserv.menu.user_profile'
+        public: true
+        resource: '../../Controller/*'
+        tags: ['controller.service_arguments']

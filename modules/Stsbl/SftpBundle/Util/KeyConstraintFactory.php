@@ -1,14 +1,11 @@
 <?php declare(strict_types = 1);
 
-namespace Stsbl\SftpBundle\EventListener;
-
-use IServ\CoreBundle\Event\MenuEvent;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+namespace Stsbl\SftpBundle\Util;
 
 /*
  * The MIT License
  *
- * Copyright 2018 Felix Jacobi.
+ * Copyright 2019 Felix Jacobi.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,31 +26,46 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  * THE SOFTWARE.
  */
 
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Regex;
+
 /**
  * @author Felix Jacobi <felix.jacobi@stsbl.de>
  * @license MIT license <https://opensource.org/licenses/MIT>
  */
-class MenuSubscriber implements EventSubscriberInterface
+final class KeyConstraintFactory
 {
-    public function onBuildUserProfileMenu(MenuEvent $event): void
-    {
-        $menu = $event->getMenu();
-
-        $item = $menu->addChild('keys', [
-            'route' => 'user_keys',
-            'label' => '.icon-pro-keys '._('Keys'),
-        ]);
-
-        $item->setLinkAttribute('title', _('Upload public keys for password less login'));
-    }
+    private const SSH_PUBLIC_KEY_REGEX = '/^ssh-rsa\s|^$/';
 
     /**
-     * {@inheritdoc}
+     * @var Regex
      */
-    public static function getSubscribedEvents(): array
+    private static $keyFormat;
+
+    /**
+     * @var NotBlank
+     */
+    private static $notBlank;
+
+    public static function getKeyFormatConstraint(): Regex
     {
-        return [
-            MenuEvent::PROFILEMENU => 'onBuildUserProfileMenu'
-        ];
+        if (null === self::$keyFormat) {
+            self::$keyFormat = new Regex([
+                'pattern' => self::SSH_PUBLIC_KEY_REGEX,
+                'htmlPattern' => self::SSH_PUBLIC_KEY_REGEX,
+                'message' => _('You must enter a valid public key. Did you may enter a private key?')
+            ]);
+        }
+
+        return self::$keyFormat;
+    }
+
+    public static function getNotBlankConstraint(): NotBlank
+    {
+        if (null === self::$notBlank) {
+            self::$notBlank = new NotBlank(['message' => _('You must enter a key.')]);
+        }
+
+        return self::$notBlank;
     }
 }

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Stsbl\SftpBundle;
 
@@ -11,7 +11,7 @@ class StsblSftpBundle extends Bundle implements AutoloadRoutingBundleInterface
     /**
      * {@inheritdoc}
      */
-    public function getContainerExtension()
+    public function getContainerExtension(): StsblSftpExtension
     {
         return new StsblSftpExtension();
     }
