@@ -1,3 +1,9 @@
+stsbl-iserv-sftp (19.01.25-1) experimental; urgency=medium
+
+  * Fixed Symfony 4 deprecations and improved structure
+
+ -- Felix Jacobi <Felix@jacobi-hamburg.net>  Fri, 25 Jan 2019 05:21:59 +0100
+
 stsbl-iserv-sftp (19.01.20-1) experimental; urgency=medium
 
   * Migrated PAM sshd configuration to iconf
