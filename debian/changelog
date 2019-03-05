@@ -1,3 +1,10 @@
+stsbl-iserv-sftp (19.03.05-1) experimental; urgency=medium
+
+  * Updated source format
+  * chksftpchroot: Fixed message ambiguous package name 'libc6'
+
+ -- Felix Jacobi <Felix@jacobi-hamburg.net>  Tue, 05 Mar 2019 21:14:12 +0100
+
 stsbl-iserv-sftp (19.01.25-1) experimental; urgency=medium
 
   * Fixed Symfony 4 deprecations and improved structure
