@@ -139,8 +139,10 @@ sub mkdir_recursive($)
 
 sub is_vdso($)
 {
-  # linux-vdso.so.1 is not a real shared object
-  return shift eq "linux-vdso.so.1";
+  my ($val) = @_;
+  # linux-vdso.so.1/linux-gate.so.1 are not a real shared objects
+  return ($val eq "linux-vdso.so.1" or
+     $val eq "linux-gate.so.1");
 }
 
 sub is_wanted($)
@@ -202,20 +204,24 @@ sub resolve_ldd($)
 }
 
 # add complete libc6
-IPC::Run::run ["dpkg", "-L", "libc6"],
-  ">", IPC::Run::new_chunker "\n",
-  sub
-  {
-    local $_ = shift;
-    chomp;
-    my $lib = $_;
-
-    if (/^(\/lib\/|\/usr\/lib).*\.so(\.[0-9]|)$/)
+for my $arch (sort split /\n/, qx(dpkg --print-architecture; dpkg --print-foreign-architectures))
+{
+  IPC::Run::run ["dpkg", "-L", "libc6:$arch"],
+    ">", IPC::Run::new_chunker "\n",
+    sub
     {
-      $want{$lib} = $lib;
-      print "adding binary $lib to chroot.\n";
-    }
-  };
+      local $_ = shift;
+      chomp;
+      my $lib = $_;
+
+      if (/^(\/lib\/|\/usr\/lib).*\.so(\.[0-9]|)$/)
+      {
+        $want{$lib} = $lib;
+        print "adding binary $lib to chroot.\n";
+      }
+    },
+    "2>", \my $throw_it_away;
+}
 
 for (keys %want)
 {
