@@ -1,0 +1,84 @@
+# IServ translation file en_US -> de_DE
+# Copyright (C) IServ (iserv.eu)
+# This file is distributed under the same license as the IServ package.
+msgid ""
+msgstr ""
+"Project-Id-Version: v.0.97.6b\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-06-28 16:43+0200\n"
+"PO-Revision-Date: 2005-02-18 10:55+MET\n"
+"Last-Translator: Felix <felix.jacobi@stsbl.de>\n"
+"Language-Team: en_US/de_DE <repository@stsbl.de>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: modules/Stsbl/SftpBundle/Controller/KeyController.php
+msgid "All stored keys were deleted successful."
+msgstr "Alle gespeicherten Schlüssel wurden erfolgreich gelöscht."
+
+#: /tmp/twig2php-stsbl-iserv-sftp/modules/Stsbl/SftpBundle/Resources/views/key/upload_public_keys.html.twig.php
+msgid "Define keys for password less login with SFTP"
+msgstr "Legen Sie die Schlüssel für die passwortlose Anmeldung mit SFTP fest"
+
+#: modules/Stsbl/SftpBundle/Form/Type/SshKeysType.php
+msgid ""
+"Enter the public keys which start with ssh-rsa (example: ssh-rsa "
+"AAAAB3Nza[...]== user@example.com)"
+msgstr ""
+"Geben Sie die öffemtlichen Schlüssel ein, die mit ssh-rsa beginnen "
+"(Beispiel: ssh-rsa AAAAB3Nza[...]== user@example.com)"
+
+#: /tmp/twig2php-stsbl-iserv-sftp/modules/Stsbl/SftpBundle/Resources/views/key/upload_public_keys.html.twig.php
+#, php-format
+msgid ""
+"For creating a SSH key under Windows, you can follow the guide \"%s\". For "
+"linux, you can follow this guide: \"%s\". After that, paste the public key "
+"in the formular below. Then you can you use the composite SSH private key "
+"with an SFTP client to login without a password."
+msgstr ""
+"Um einen SSH-Schlüssel unter Windows zu erstellen, können Sie dieser "
+"Anleitung folgen: \"%s\". Für Linux folgen Sie dieser Anleitung: \"%s\". "
+"Danach fügen Sie den öffentlichen Schlüssel in das Formular unten ein. Dann "
+"können Sie den zugehörigen privaten SSH-Schlüssel nutzen, um sich mit einem "
+"SFTP-Client ohne Passwort anzumelden."
+
+#: modules/Stsbl/SftpBundle/Controller/KeyController.php
+#: modules/Stsbl/SftpBundle/EventListener/MenuSubscriber.php
+#: /tmp/twig2php-stsbl-iserv-sftp/modules/Stsbl/SftpBundle/Resources/views/key/upload_public_keys.html.twig.php
+msgid "Keys"
+msgstr "Schlüssel"
+
+#: modules/Stsbl/SftpBundle/Controller/KeyController.php
+msgid "New key was stored successful."
+msgid_plural "New keys were stored successful."
+msgstr[0] "Neuer Schlüssel wurde erfolgreich gespeichert."
+msgstr[1] "Neue Schlüssel wurden erfolgreich gespeichert."
+
+#: modules/Stsbl/SftpBundle/Controller/KeyController.php
+msgid "Profile"
+msgstr "Profil"
+
+#: modules/Stsbl/SftpBundle/Form/Type/SshKeysType.php
+msgid "Public keys"
+msgstr "Öffentliche Schlüssel"
+
+#: modules/Stsbl/SftpBundle/Form/Type/SshKeysType.php
+msgid "Save"
+msgstr "Speichern"
+
+#: modules/Stsbl/SftpBundle/EventListener/MenuSubscriber.php
+msgid "Upload public keys for password less login"
+msgstr "Öffentliche Schlüssel für passwortlosen Login hochladen"
+
+#: modules/Stsbl/SftpBundle/Util/KeyConstraintFactory.php
+msgid "You must enter a key."
+msgstr "Sie müssen einen Schlüssel eingeben."
+
+#: modules/Stsbl/SftpBundle/Util/KeyConstraintFactory.php
+msgid "You must enter a valid public key. Did you may enter a private key?"
+msgstr ""
+"Sie müssen einen gültigen öffentlichen Schlüssel eingeben. Haben Sie "
+"möglicherweise einen privaten Schlüssel eingegeben?"
