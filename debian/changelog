@@ -1,3 +1,10 @@
+stsbl-iserv-sftp (20.08.02-1) testing; urgency=medium
+
+  * Bumped copyright
+  * Updated locale handling to use genpo
+
+ -- Felix Jacobi <Felix@jacobi-hamburg.net>  Sun, 02 Aug 2020 06:50:31 +0200
+
 stsbl-iserv-sftp (19.03.05-1) experimental; urgency=medium
 
   * Updated source format
