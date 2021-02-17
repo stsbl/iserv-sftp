@@ -1,3 +1,11 @@
+stsbl-iserv-sftp (21.02.17-1) stable; urgency=medium
+
+  * Updated license copyright
+  * Fixed Build-Depends
+  * Excluded sftp-chroot mountpoint from backup2
+
+ -- Felix Jacobi <Felix@jacobi-hamburg.net>  Wed, 17 Feb 2021 02:25:55 +0100
+
 stsbl-iserv-sftp (20.08.02-1) testing; urgency=medium
 
   * Bumped copyright
