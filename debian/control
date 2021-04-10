@@ -1,23 +1,22 @@
 Source: stsbl-iserv-sftp
 Section: misc
-Priority: extra
+Priority: optional
 Maintainer: Stadtteilschule Blankenese <repository@stsbl.de>
-Build-Depends: debhelper (>= 10)
-Build-Depends-Indep: iserv-buildtools
-Standards-Version: 4.1.3
+Build-Depends: debhelper-compat (= 13), dh-sequence-iserv, dh-sequence-stsbl
+Standards-Version: 4.5.0
 
 Package: stsbl-iserv-sftp
 Architecture: all
-Depends: ${perl:Depends},
-  ${misc:Depends},
-  iserv-portal,
-  iserv3-core,
-  iserv3-file,
-  iserv3-filesystem,
-  stsbl-iserv3-maintenance,
-  stsbl-iserv-sftp,
-  stsbl-iserv-perl-lib,
-Xb-Private-IServ-Revision: ${iserv:Revision}
+Depends: iserv-portal,
+         iserv3-core,
+         iserv3-file,
+         iserv3-filesystem,
+         stsbl-iserv-perl-lib,
+         stsbl-iserv-sftp,
+         stsbl-iserv3-maintenance,
+         ${misc:Depends},
+         ${perl:Depends}
+Xb-Private-Iserv-Revision: ${iserv:Revision}
 Description: SFTP für IServ (EXPERIMENTELL)
  Dieses Paket stellt einen experimentellen SFTP-Server für alle
  Serverbenutzer bereit.
@@ -26,11 +25,11 @@ Description: SFTP für IServ (EXPERIMENTELL)
  eine für die Secure Shell (SSH) entworfene Alternative zum File Transfer
  Protocol (FTP), die Verschlüsselung ermöglicht.
  .
- Im Unterschied zum FTP über TLS (FTPS) begnügt sich SFTP mit einer 
+ Im Unterschied zum FTP über TLS (FTPS) begnügt sich SFTP mit einer
  einzigen Verbindung zwischen Client und Server.
  .
- Das Protokoll eignet sich insbesondere besser für die 
- Offline-Synchronisation, zum  Beispiel mit dem heimischen PC. 
- Bei FTP und WebDAV gibt es dabei häufig Probleme mit der Übertragung 
+ Das Protokoll eignet sich insbesondere besser für die
+ Offline-Synchronisation, zum  Beispiel mit dem heimischen PC.
+ Bei FTP und WebDAV gibt es dabei häufig Probleme mit der Übertragung
  der Zeitstempel.
 Tag: suite::iserv:portal, role::plugin, status::highlighted, status::experimental, implemented-in::shell, implemented-in::php, implemented-in::perl
