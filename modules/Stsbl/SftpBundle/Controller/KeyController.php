@@ -1,4 +1,6 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Stsbl\SftpBundle\Controller;
 
@@ -6,7 +8,7 @@ use IServ\CoreBundle\Controller\AbstractPageController;
 use Knp\Menu\ItemInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Stsbl\SftpBundle\Form\Type\SshKeysType;
-use Stsbl\SftpBundle\Model\AuthorizedKeyFile;
+use Stsbl\SftpBundle\Model\AuthorizedKeysFile;
 use Stsbl\SftpBundle\Service\SshKeys;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Controller to handle reading and writing of authorized SSH keys for the user.
  */
-class KeyController extends AbstractPageController
+final class KeyController extends AbstractPageController
 {
     /**
      * @var ItemInterface
@@ -25,7 +27,7 @@ class KeyController extends AbstractPageController
     /**
      * Upload public key action
      *
-     * @Route("/profile/keys", name="user_keys")
+     * @Route("/profile/sftp/keys", name="user_sftp_keys")
      * @Template()
      *
      * @return array|RedirectResponse
@@ -36,15 +38,15 @@ class KeyController extends AbstractPageController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var AuthorizedKeyFile $authorizedKeys */
+            /** @var AuthorizedKeysFile $authorizedKeys */
             $authorizedKeys = $form->getData();
 
             $handler->putPublicKeys($authorizedKeys);
 
             if (!$authorizedKeys->hasKeys()) {
-                $this->addFlash('success', _('All stored keys were deleted successful.'));
+                $this->flashMessage()->success(_('All stored keys were deleted successful.'));
             } else {
-                $this->addFlash('success', _n(
+                $this->flashMessage()->success(_n(
                     'New key was stored successful.',
                     'New keys were stored successful.',
                     $authorizedKeys->countKeys()

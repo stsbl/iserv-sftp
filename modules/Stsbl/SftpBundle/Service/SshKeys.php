@@ -1,4 +1,6 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Stsbl\SftpBundle\Service;
 
@@ -7,7 +9,7 @@ use IServ\FilesystemBundle\Exception\FilesystemNotFoundException;
 use IServ\FilesystemBundle\Service\Filesystem;
 use League\Flysystem\FileExistsException;
 use League\Flysystem\FileNotFoundException;
-use Stsbl\SftpBundle\Model\AuthorizedKeyFile;
+use Stsbl\SftpBundle\Model\AuthorizedKeysFile;
 
 /*
  * The MIT License
@@ -33,11 +35,11 @@ use Stsbl\SftpBundle\Model\AuthorizedKeyFile;
  * THE SOFTWARE.
  */
 
-/** 
+/**
  * @author Felix Jacobi <felix.jacobi@stsbl.de>
  * @license MIT license <https://opensource.org/licenses/MIT>
  */
-class SshKeys
+final class SshKeys
 {
     private const AUTHORIZED_KEY_PATH = '.ssh/authorized_keys';
 
@@ -76,7 +78,7 @@ class SshKeys
 
             // remove empty lines
             foreach ($keys as $index => $line) {
-                if (strlen($line) < 1) {
+                if ('' === $line) {
                     unset($keys[$index]);
                 }
             }
@@ -88,15 +90,15 @@ class SshKeys
     /**
      * Returns the model to edit the user's authorized keys file.
      */
-    public function fetchPublicKeys(): AuthorizedKeyFile
+    public function fetchPublicKeys(): AuthorizedKeysFile
     {
-        return AuthorizedKeyFile::createFromKeyArray($this->fetchPublicKeysFromAuthorizedKeys());
+        return AuthorizedKeysFile::createFromKeyArray($this->fetchPublicKeysFromAuthorizedKeys());
     }
 
     /**
      * This writes back the model to the user's authorized keys file.
      */
-    public function putPublicKeys(AuthorizedKeyFile $file): void
+    public function putPublicKeys(AuthorizedKeysFile $file): void
     {
         try {
             $local = $this->filesystem->getFilesystem(Local::getAdapterSource());

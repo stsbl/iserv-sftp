@@ -1,8 +1,11 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Stsbl\SftpBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use IServ\CoreBundle\Exception\TypeException;
 use Stsbl\SftpBundle\Util\KeyConstraintFactory;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -38,10 +41,10 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
  * @author Felix Jacobi <felix.jacobi@stsbl.de>
  * @license MIT license <https://opensource.org/licenses/MIT>
  */
-class AuthorizedKeyFile
+final class AuthorizedKeysFile
 {
     /**
-     * @var string[]|ArrayCollection
+     * @var string[]&Collection
      */
     private $keys;
 
@@ -53,9 +56,9 @@ class AuthorizedKeyFile
     /**
      * Return's the keys included in the key file.
      *
-     * @return string[]|ArrayCollection
+     * @return string[]&Collection
      */
-    public function getKeys(): ArrayCollection
+    public function getKeys(): Collection
     {
         return $this->keys;
     }

@@ -1,9 +1,10 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Stsbl\SftpBundle\Form\Type;
 
-use Braincrafted\Bundle\BootstrapBundle\Form\Type\BootstrapCollectionType;
-use Stsbl\SftpBundle\Model\AuthorizedKeyFile;
+use Stsbl\SftpBundle\Model\AuthorizedKeysFile;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -38,7 +39,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * @author Felix Jacobi <felix.jacobi@stsbl.de>
  * @license MIT license <https://opensource.org/licenses/MIT>
  */
-class SshKeysType extends AbstractType
+final class SshKeysType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -46,13 +47,13 @@ class SshKeysType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('keys', BootstrapCollectionType::class, [
+            ->add('keys', \IServ\BootstrapBundle\Form\Type\BootstrapCollectionType::class, [
                 'required' => false,
                 'label' => _('Public keys'),
                 'entry_type' => TextType::class,
                 'prototype_name' => 'proto-entry',
                 'attr' => [
-                    'help_text' => _('Enter the public keys which start with ssh-rsa (example: ssh-rsa '.
+                    'help_text' => _('Enter the public keys which start with ssh-rsa (example: ssh-rsa ' .
                         'AAAAB3Nza[...]== user@example.com)'),
                 ],
                 // Child options
@@ -75,6 +76,6 @@ class SshKeysType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefault('data_class', AuthorizedKeyFile::class);
+        $resolver->setDefault('data_class', AuthorizedKeysFile::class);
     }
 }

@@ -1,4 +1,6 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Stsbl\SftpBundle\EventListener;
 
@@ -33,15 +35,15 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  * @author Felix Jacobi <felix.jacobi@stsbl.de>
  * @license MIT license <https://opensource.org/licenses/MIT>
  */
-class MenuSubscriber implements EventSubscriberInterface
+final class MenuSubscriber implements EventSubscriberInterface
 {
     public function onBuildUserProfileMenu(MenuEvent $event): void
     {
         $menu = $event->getMenu();
 
         $item = $menu->addChild('keys', [
-            'route' => 'user_keys',
-            'label' => '.icon-pro-keys '._('Keys'),
+            'route' => 'user_sftp_keys',
+            'label' => '.icon-pro-keys ' . _('Keys'),
         ]);
 
         $item->setLinkAttribute('title', _('Upload public keys for password less login'));
