@@ -13,7 +13,6 @@ Depends: iserv-portal,
          iserv3-file,
          iserv3-filesystem,
          stsbl-iserv-perl-lib,
-         stsbl-iserv-sftp,
          stsbl-iserv3-maintenance,
          ${misc:Depends},
          ${perl:Depends}
