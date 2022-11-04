@@ -19,20 +19,18 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class KeyController extends AbstractPageController
 {
-    /**
-     * @var ItemInterface
-     */
-    private $userProfileMenu;
+    public function __construct(
+        private readonly ItemInterface $userProfileMenu,
+    ) {
+    }
 
     /**
      * Upload public key action
      *
      * @Route("/profile/sftp/keys", name="user_sftp_keys")
      * @Template()
-     *
-     * @return array|RedirectResponse
      */
-    public function uploadPublicKeys(Request $request, SshKeys $handler)
+    public function uploadPublicKeys(Request $request, SshKeys $handler): RedirectResponse|array
     {
         $form = $this->createForm(SshKeysType::class, $handler->fetchPublicKeys());
         $form->handleRequest($request);
@@ -63,13 +61,5 @@ final class KeyController extends AbstractPageController
             'form' => $form->createView(),
             'menu' => $this->userProfileMenu,
         ];
-    }
-
-    /**
-     * @required
-     */
-    public function setUserProfileMenu(ItemInterface $userProfileMenu): void
-    {
-        $this->userProfileMenu = $userProfileMenu;
     }
 }

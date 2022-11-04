@@ -43,14 +43,9 @@ final class SshKeys
 {
     private const AUTHORIZED_KEY_PATH = '.ssh/authorized_keys';
 
-    /**
-     * @var Filesystem
-     */
-    private $filesystem;
-
-    public function __construct(Filesystem $filesystem)
-    {
-        $this->filesystem = $filesystem;
+    public function __construct(
+        private readonly Filesystem $filesystem,
+    ) {
     }
 
     /**

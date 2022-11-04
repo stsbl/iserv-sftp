@@ -6,7 +6,6 @@ namespace Stsbl\SftpBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use IServ\CoreBundle\Exception\TypeException;
 use Stsbl\SftpBundle\Util\KeyConstraintFactory;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\ConstraintViolationInterface;
@@ -46,7 +45,7 @@ final class AuthorizedKeysFile
     /**
      * @var string[]&Collection
      */
-    private $keys;
+    private Collection $keys;
 
     public function __construct()
     {
@@ -142,7 +141,7 @@ final class AuthorizedKeysFile
 
         foreach ($lines as $line) {
             if (!is_string($line)) {
-                throw TypeException::invalid($line, 'string', '$lines');
+                throw \IServ\Library\Common\Exception\TypeException::invalid($line, 'string', '$lines');
             }
 
             $instance->addKey($line);

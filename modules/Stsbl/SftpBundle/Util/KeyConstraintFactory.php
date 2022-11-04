@@ -39,15 +39,9 @@ final class KeyConstraintFactory
 {
     private const SSH_PUBLIC_KEY_REGEX = '/^ssh-rsa\s|^$/';
 
-    /**
-     * @var Regex
-     */
-    private static $keyFormat;
+    private static ?Regex $keyFormat = null;
 
-    /**
-     * @var NotBlank
-     */
-    private static $notBlank;
+    private static ?NotBlank $notBlank = null;
 
     public static function getKeyFormatConstraint(): Regex
     {
