@@ -1,3 +1,15 @@
+stsbl-iserv-sftp (24.03.04.1) stable; urgency=medium
+
+  * Renamed locale templates
+  * Renamed pot files
+  * Updated .gitignore
+  * Updated CS to PSR-12
+  * iservmake: Disabled Pootle download
+  * Added support for stsbl-remotesupport group
+  * Added /usr/sbin/nologin to chroot
+
+ -- Felix Jacobi <Felix@jacobi-hamburg.net>  Mon, 04 Mar 2024 02:09:38 +0100
+
 stsbl-iserv-sftp (22.11.04.1) testing; urgency=medium
 
   * Modernized code
