@@ -1,7 +1,7 @@
 # TRANSLATION CATALOG OF STSBL-ISERV-SFTP.
-# Copyright (C) 2023 IServ GmbH
+# Copyright (C) 2024 IServ GmbH
 # This file is distributed under the same license as the stsbl-iserv-sftp package.
-# IServ GmbH <info@iserv.eu>, 2023.
+# IServ GmbH <info@iserv.eu>, 2024.
 #
 #, fuzzy
 msgid ""
@@ -36,8 +36,8 @@ msgid ""
 "with an SFTP client to login without a password."
 msgstr ""
 
-#: modules/Stsbl/SftpBundle/EventListener/MenuSubscriber.php
 #: modules/Stsbl/SftpBundle/Controller/KeyController.php
+#: modules/Stsbl/SftpBundle/EventListener/MenuSubscriber.php
 #: modules/Stsbl/SftpBundle/Resources/views/key/upload_public_keys.html.twig.php
 msgid "Keys"
 msgstr ""

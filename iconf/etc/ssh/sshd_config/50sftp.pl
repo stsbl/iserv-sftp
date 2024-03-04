@@ -30,7 +30,7 @@ if (not $has_root)
   print "!root,";
 }
 
-print "!iserv-remote-support\n";
+print "!iserv-remote-support,!stsbl-remotesupport\n";
 
 print "  ChrootDirectory /sftp-chroot\n";
 print "  X11Forwarding no\n";
