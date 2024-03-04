@@ -1,4 +1,5 @@
-#!/bin/sh -e
+#!/bin/sh
+set -e
 
 DIR=/sftp-chroot
 
@@ -11,7 +12,7 @@ if ! is_mnt
 then
   if [ ! -d "$DIR" ]
   then
-    mkdir -m 0755 -p $DIR
+    mkdir -m 0755 -p "$DIR"
   fi
-  mount -o mode=755,uid=0,gid=0 -t tmpfs tmpfs $DIR
+  mount -o mode=755,uid=0,gid=0 -t tmpfs tmpfs "$DIR"
 fi

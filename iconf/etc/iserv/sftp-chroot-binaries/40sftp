@@ -1,0 +1,3 @@
+# Login shell for IServ users
+/usr/sbin/nologin
+
