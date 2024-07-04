@@ -19,7 +19,7 @@ msgstr ""
 msgid "All stored keys were deleted successful."
 msgstr "Alle gespeicherten Schlüssel wurden erfolgreich gelöscht."
 
-#: /tmp/twig2php-stsbl-iserv-sftp/modules/Stsbl/SftpBundle/Resources/views/key/upload_public_keys.html.twig.php
+#: modules/Stsbl/SftpBundle/Resources/views/key/upload_public_keys.html.twig.php
 msgid "Define keys for password less login with SFTP"
 msgstr "Legen Sie die Schlüssel für die passwortlose Anmeldung mit SFTP fest"
 
@@ -31,7 +31,7 @@ msgstr ""
 "Geben Sie die öffemtlichen Schlüssel ein, die mit ssh-rsa beginnen "
 "(Beispiel: ssh-rsa AAAAB3Nza[...]== user@example.com)"
 
-#: /tmp/twig2php-stsbl-iserv-sftp/modules/Stsbl/SftpBundle/Resources/views/key/upload_public_keys.html.twig.php
+#: modules/Stsbl/SftpBundle/Resources/views/key/upload_public_keys.html.twig.php
 #, php-format
 msgid ""
 "For creating a SSH key under Windows, you can follow the guide \"%s\". For "
@@ -45,9 +45,9 @@ msgstr ""
 "können Sie den zugehörigen privaten SSH-Schlüssel nutzen, um sich mit einem "
 "SFTP-Client ohne Passwort anzumelden."
 
-#: modules/Stsbl/SftpBundle/Controller/KeyController.php
 #: modules/Stsbl/SftpBundle/EventListener/MenuSubscriber.php
-#: /tmp/twig2php-stsbl-iserv-sftp/modules/Stsbl/SftpBundle/Resources/views/key/upload_public_keys.html.twig.php
+#: modules/Stsbl/SftpBundle/Controller/KeyController.php
+#: modules/Stsbl/SftpBundle/Resources/views/key/upload_public_keys.html.twig.php
 msgid "Keys"
 msgstr "Schlüssel"
 
