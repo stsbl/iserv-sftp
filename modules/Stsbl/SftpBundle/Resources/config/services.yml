@@ -9,8 +9,5 @@ services:
         exclude: '../../{Entity,Model,Resources,Tests}'
 
     Stsbl\SftpBundle\Controller\:
-        bind:
-            $userProfileMenu: '@iserv.menu.user_profile'
-        public: true
         resource: '../../Controller/*'
         tags: ['controller.service_arguments']

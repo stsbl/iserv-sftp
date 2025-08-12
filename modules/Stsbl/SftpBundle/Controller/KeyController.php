@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace Stsbl\SftpBundle\Controller;
 
-use IServ\CoreBundle\Controller\AbstractPageController;
-use Knp\Menu\ItemInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use IServ\Bundle\Account\Controller\AbstractAccountController;
+use IServ\Bundle\Account\Menu\AccountBreadcrumbs;
+use IServ\Bundle\Flash\Flash\FlashInterface;
+use IServ\Library\ModuleResponse\ResponseContent;
 use Stsbl\SftpBundle\Form\Type\SshKeysType;
 use Stsbl\SftpBundle\Model\AuthorizedKeysFile;
 use Stsbl\SftpBundle\Service\SshKeys;
@@ -17,20 +18,20 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Controller to handle reading and writing of authorized SSH keys for the user.
  */
-final class KeyController extends AbstractPageController
+final class KeyController extends AbstractAccountController
 {
     public function __construct(
-        private readonly ItemInterface $userProfileMenu,
+        private readonly AccountBreadcrumbs $accountBreadcrumbs,
+        private readonly FlashInterface $flash,
     ) {
     }
 
     /**
      * Upload public key action
      *
-     * @Route("/profile/sftp/keys", name="user_sftp_keys")
-     * @Template()
      */
-    public function uploadPublicKeys(Request $request, SshKeys $handler): RedirectResponse|array
+    #[Route("/profile/sftp/keys", name: "user_sftp_keys")]
+    public function uploadPublicKeys(Request $request, SshKeys $handler): RedirectResponse|ResponseContent
     {
         $form = $this->createForm(SshKeysType::class, $handler->fetchPublicKeys());
         $form->handleRequest($request);
@@ -42,9 +43,9 @@ final class KeyController extends AbstractPageController
             $handler->putPublicKeys($authorizedKeys);
 
             if (!$authorizedKeys->hasKeys()) {
-                $this->flashMessage()->success(_('All stored keys were deleted successful.'));
+                $this->flash->success(_('All stored keys were deleted successful.'));
             } else {
-                $this->flashMessage()->success(_n(
+                $this->flash->success(_n(
                     'New key was stored successful.',
                     'New keys were stored successful.',
                     $authorizedKeys->countKeys()
@@ -54,12 +55,15 @@ final class KeyController extends AbstractPageController
             return $this->redirectToRoute('user_keys');
         }
 
-        $this->addBreadcrumb(_('Profile'), $this->generateUrl('user_profile'));
-        $this->addBreadcrumb(_('Keys'));
+        $content = $this->renderView('@StsblSftp/key/upload_public_keys.html.twig', ['form' => $form->createView()]);
 
-        return [
-            'form' => $form->createView(),
-            'menu' => $this->userProfileMenu,
-        ];
+        $response = $this->createResponseBuilder($content)
+            ->addBreadcrumb($this->accountBreadcrumbs->root()->getLabel(), $this->accountBreadcrumbs->root()->getUrl())
+            ->addBreadcrumb($this->accountBreadcrumbs->settings()->getLabel(), $this->accountBreadcrumbs->settings()->getUrl())
+            ->addBreadcrumb(_('Keys'))
+            ->setTitle(_('Keys'))
+        ;
+
+        return $response->getResponseContent();
     }
 }

@@ -1,7 +1,7 @@
 # TRANSLATION CATALOG OF STSBL-ISERV-SFTP.
-# Copyright (C) 2024 IServ GmbH
+# Copyright (C) 2025 IServ GmbH
 # This file is distributed under the same license as the stsbl-iserv-sftp package.
-# IServ GmbH <info@iserv.eu>, 2024.
+# IServ GmbH <info@iserv.eu>, 2025.
 #
 #, fuzzy
 msgid ""
@@ -48,12 +48,12 @@ msgid_plural "New keys were stored successful."
 msgstr[0] ""
 msgstr[1] ""
 
-#: modules/Stsbl/SftpBundle/Controller/KeyController.php
-msgid "Profile"
-msgstr ""
-
 #: modules/Stsbl/SftpBundle/Form/Type/SshKeysType.php
 msgid "Public keys"
+msgstr ""
+
+#: share/shared/account/menu/stsbl-iserv-sftp.php
+msgid "SSH keys"
 msgstr ""
 
 #: modules/Stsbl/SftpBundle/Form/Type/SshKeysType.php

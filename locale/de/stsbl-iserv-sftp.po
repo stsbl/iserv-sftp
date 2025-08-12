@@ -45,8 +45,8 @@ msgstr ""
 "können Sie den zugehörigen privaten SSH-Schlüssel nutzen, um sich mit einem "
 "SFTP-Client ohne Passwort anzumelden."
 
-#: modules/Stsbl/SftpBundle/EventListener/MenuSubscriber.php
 #: modules/Stsbl/SftpBundle/Controller/KeyController.php
+#: modules/Stsbl/SftpBundle/EventListener/MenuSubscriber.php
 #: modules/Stsbl/SftpBundle/Resources/views/key/upload_public_keys.html.twig.php
 msgid "Keys"
 msgstr "Schlüssel"
@@ -57,13 +57,13 @@ msgid_plural "New keys were stored successful."
 msgstr[0] "Neuer Schlüssel wurde erfolgreich gespeichert."
 msgstr[1] "Neue Schlüssel wurden erfolgreich gespeichert."
 
-#: modules/Stsbl/SftpBundle/Controller/KeyController.php
-msgid "Profile"
-msgstr "Profil"
-
 #: modules/Stsbl/SftpBundle/Form/Type/SshKeysType.php
 msgid "Public keys"
 msgstr "Öffentliche Schlüssel"
+
+#: share/shared/account/menu/stsbl-iserv-sftp.php
+msgid "SSH keys"
+msgstr "SSH-Schlüssel"
 
 #: modules/Stsbl/SftpBundle/Form/Type/SshKeysType.php
 msgid "Save"

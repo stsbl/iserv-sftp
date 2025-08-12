@@ -1,10 +1,10 @@
-{%  extends '@IServCore/page.html.twig' %}
+{% extends '@IServAccount/settings_base.html.twig' %}
 
 {%  block page_title %}
     {{  _('Keys') }}
 {%  endblock %}
 
-{% block content %}
+{% block settings_content %}
     <div class="alert alert-info">
         {{ __('For creating a SSH key under Windows, you can follow the guide "%s". For linux, you can follow this guide: "%s". After that, paste the public key in the formular below. Then you can you use the composite SSH private key with an SFTP client to login without a password.',
                 '<a target="_blank" href="http://www.informatik.uni-bremen.de/t/SSH/Putty_PubKey_Config">Putty: Public Key ' ~
